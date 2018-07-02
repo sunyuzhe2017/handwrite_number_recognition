@@ -127,6 +127,10 @@ Mat deal_camera(Mat srcImage)
    // cout<<max_id<<endl;
 
       cv::Rect roi_rect = minAreaRect(contours[max_id]).boundingRect();
+    if (roi_rect.tl().x < 0 ||roi_rect.tl().y<0 )
+         return srcImage;
+      if (roi_rect.br().x > 640 || roi_rect.br().y > 480)
+          return srcImage;
     try{
         grayImage = grayImage(roi_rect);
     }
